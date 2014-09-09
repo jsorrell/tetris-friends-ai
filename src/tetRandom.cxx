@@ -10,16 +10,16 @@ RandomPieceGen :: RandomPieceGen(int seed) {
     m = (((m << 5 & 0xFFFF) | (m >> 11 & 0xFFFF)) & 0xFFFF) + 97;
     m &= 0xFFFF;
   }
-  
+
   mRand1 = 0;
   mRand2 = 10;
 
   for (int i = 0; i < 100; i++) {
-    this->GetNextRandom();
+    this->getNextRandom();
   }
 }
 
-int RandomPieceGen :: GetNextRandom() {
+int RandomPieceGen :: getNextRandom() {
   int a;
   int b;
   int c;

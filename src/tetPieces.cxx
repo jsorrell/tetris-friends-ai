@@ -10,25 +10,25 @@ tetPieces :: tetPieces(int seed) {
 tetPiece tetPieces :: getNextPiece() {
   if (pieceQueue.empty()) {
     bool refillSlots[7];
-    
+
     for (int i = 0; i < 7; i++) {
       refillSlots[i] = false;
     }
-    
+
     tetPiece p;
     for (int i = 0; i < 7; i++) {
       do {
-        p = (tetPiece)(this->rand->GetNextRandom() % 7);
+        p = (tetPiece)(this->rand->getNextRandom() % 7);
       } while (refillSlots[p]);
-      
+
       refillSlots[p] = true;
       pieceQueue.insert(pieceQueue.begin(),p);
     }
   }
   tetPiece back = pieceQueue.back();
-  
+
   pieceQueue.pop_back();
-  
+
   return back;
 }
 
@@ -46,19 +46,19 @@ vector<tetPiece> tetPieces :: getNextPieces(unsigned num) {
 //  tetPiece pieceArray[7] = {0,1,2,3,4,5,6};
 //  bool refillSlots[7];
 //  tetPiece *output = new tetPiece[7];
-//  
+//
 //  for (int i = 0; i < 7; i++) {
 //    refillSlots[i] = false;
 //  }
 //  tetPiece p;
 //  for (int i = 0; i < 7; i++) {
 //    do {
-//      p = r.GetNextRandom() % 7;
-//    
+//      p = r.getNextRandom() % 7;
+//
 //    } while (refillSlots[j]);
-//    
+//
 //    refillSlots[p] = true;
-//    
+//
 //    output[i] = p;
 //  }
 //  return output;

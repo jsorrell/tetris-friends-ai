@@ -5,8 +5,8 @@ class RandomPieceGen {
   public:
     RandomPieceGen(int seed);
     int getSeed() { return mSeed; }
-    int GetNextRandom();
-    
+    int getNextRandom();
+
   private:
     int mRand1;
     int mRand2;
