@@ -2,11 +2,13 @@
 
 using namespace std;
 
+//PLEASE don't modify this
+
 RandomPieceGen :: RandomPieceGen(int seed) {
-  this->mSeed = seed & 0xFFFF;
+  mSeed = seed & 0xFFFF;
   unsigned m = (unsigned)mSeed;
   for (int i = 0; i < 17; i++) {
-    this->mRandBuffer[i] = m;
+    mRandBuffer[i] = m;
     m = (((m << 5 & 0xFFFF) | (m >> 11 & 0xFFFF)) & 0xFFFF) + 97;
     m &= 0xFFFF;
   }
@@ -19,19 +21,16 @@ RandomPieceGen :: RandomPieceGen(int seed) {
   }
 }
 
-int RandomPieceGen :: getNextRandom() {
-  int a;
-  int b;
-  int c;
+int RandomPieceGen :: getNextRandom()
+{
+  int b = mRandBuffer[mRand1];
+  int c = mRandBuffer[mRand2];
 
-  b = this->mRandBuffer[this->mRand1];
-  c = this->mRandBuffer[this->mRand2];
-
-  a = ((b << 3 & 0xFFFF) | (b >> 13 & 0xFFFF)) & 0xFFFF;
+  int a = ((b << 3 & 0xFFFF) | (b >> 13 & 0xFFFF)) & 0xFFFF;
   a += ((c << 5 & 0xFFFF) | (c >> 11 & 0xFFFF)) & 0xFFFF;
   a &= 0xFFFF;
-  this->mRandBuffer[this->mRand1] = a;
-  this->mRand1 = this->mRand1 <= 0 ? 16 : this->mRand1-1;
-  this->mRand2 = this->mRand2 <= 0 ? 16 : this->mRand2-1;
+  mRandBuffer[this->mRand1] = a;
+  mRand1 = mRand1 <= 0 ? 16 : mRand1-1;
+  mRand2 = mRand2 <= 0 ? 16 : mRand2-1;
   return a & 2047u;
 }

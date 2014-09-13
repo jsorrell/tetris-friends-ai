@@ -12,18 +12,17 @@
 #include "tetCore.hpp"
 
 using namespace std;
-using namespace TetCore;
+using namespace Tetris;
 
-namespace TetAi {
+namespace Tetris {
 
 	class tetAi
 	{
 	public:
-		tetAi();
-		~tetAi();
-		tetMove chooseMove(tetGame* game, pieceType piece);
+		static bool chooseMove(const tetGame &game, const tetPiece piece, tetMove *output);
+
 	private:
-		double calculateValue(boardInfo info);
+		static double calculateValue(boardInfo info);
 	};
 
 }

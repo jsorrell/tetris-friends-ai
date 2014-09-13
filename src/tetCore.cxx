@@ -1,138 +1,168 @@
 #include "tetCore.hpp"
 
 using namespace std;
-using namespace TetCore;
-
+using namespace Tetris;
 /**************/
 /***tetPiece***/
 /**************/
-tetPiece::tetPiece(pieceType type)
-{
-	_type = type;
-}
+
 tetPiece::tetPiece(string typeName)
-{
-	_type = parseType(typeName);
-}
-vector< vector<bool> > tetPiece::getShape(int direction)
-{
-	vector< vector<bool> > shape;
-	switch(_type) {
-		case pieceType::SPiece:
-			switch (direction) {
-				case 0:
-				case 2: shape = {{false,false,false,false},{false,true,true,false},{false,false,true,true},{false,false,false,false}}; break;
-				case 1:
-				case 3: shape = {{false,false,false,false},{false,false,false,true},{false,false,true,true},{false,false,true,false}}; break;
-			}
-			break;
-		case pieceType::JPiece:
-			switch (direction) {
-				case 0: shape = {{false,false,false,false},{false,false,false,false},{false,true,true,true},{false,true,false,false}}; break;
-				case 1: shape = {{false,false,false,false},{false,true,true,false},{false,false,true,false},{false,false,true,false}}; break;
-				case 2: shape = {{false,false,false,false},{false,false,false,true},{false,true,true,true},{false,false,false,false}}; break;
-				case 3: shape = {{false,false,false,false},{false,false,true,false},{false,false,true,false},{false,false,true,true}}; break;
-			}
-			break;
-		case pieceType::OPiece:
-			switch (direction) {
-				case 0:
-				case 1:
-				case 2:
-				case 3: shape = {{false,false,false,false},{false,true,true,false},{false,true,true,false},{false,false,false,false}}; break;
-			}
-			break;
-		case pieceType::ZPiece:
-			switch (direction) {
-				case 0:
-				case 2: shape = {{false,false,false,false},{false,false,true,true},{false,true,true,false},{false,false,false,false}}; break;
-				case 1:
-				case 3: shape = {{false,false,false,false},{false,false,true,false},{false,false,true,true},{false,false,false,true}}; break;
-			}
-			break;
-		case pieceType::IPiece:
-			switch (direction) {
-				case 0:
-				case 2: shape = {{false,false,false,false},{false,false,false,false},{true,true,true,true},{false,false,false,false}}; break;
-				case 1:
-				case 3: shape = {{false,false,true,false},{false,false,true,false},{false,false,true,false},{false,false,true,false}}; break;
-			}
-			break;
-		case pieceType::LPiece:
-			switch (direction) {
-				case 0: shape = {{false,false,false,false},{false,false,false,false},{false,true,true,true},{false,false,false,true}}; break;
-				case 1: shape = {{false,false,false,false},{false,false,true,false},{false,false,true,false},{false,true,true,false}}; break;
-				case 2: shape = {{false,false,false,false},{false,true,false,false},{false,true,true,true},{false,false,false,false}}; break;
-				case 3: shape = {{false,false,false,false},{false,false,true,true},{false,false,true,false},{false,false,true,false}}; break;
-			}
-			break;
-		case pieceType::TPiece:
-			switch (direction) {
-				case 0: shape = {{false,false,false,false},{false,false,false,false},{false,true,true,true},{false,false,true,false}}; break;
-				case 1: shape = {{false,false,false,false},{false,false,true,false},{false,true,true,false},{false,false,true,false}}; break;
-				case 2: shape = {{false,false,false,false},{false,false,true,false},{false,true,true,true},{false,false,false,false}}; break;
-				case 3: shape = {{false,false,false,false},{false,false,true,false},{false,false,true,true},{false,false,true,false}}; break;
-			}
-			break;
-
-	}
-	return shape;
-}
-
-vector<int> tetPiece::lowestInEachCol(int direction)
-{
-	vector<vector<bool>> shape = getShape(direction);
-	vector<int>lowest(4,4);
-	for (int row = 3; row >= 0; row--)
-		for (int col = 0; col < 4; col++) {
-			if (shape[row][col])
-				lowest[col] = row;
-		}
-	return lowest;
-}
-
-string tetPiece::getTypeName(pieceType type)
-{
-	switch (type) {
-		case pieceType::ZPiece: return "Z";
-		case pieceType::LPiece: return "L";
-		case pieceType::OPiece: return "O";
-		case pieceType::SPiece: return "S";
-		case pieceType::IPiece: return "I";
-		case pieceType::JPiece: return "J";
-		case pieceType::TPiece: return "T";
-	}
-	cerr << "Invalid piece passed to getTypeName\n";
-	exit(1);
-}
-pieceType tetPiece::parseType(string typeName)
 {
 	assert(typeName != "");
 
 	switch (typeName[0]) {
 		case 'z':
-		case 'Z': return pieceType::ZPiece;
+		case 'Z': type = minoType::ZPiece; return;
 		case 'l':
-		case 'L': return pieceType::LPiece;
+		case 'L': type = minoType::LPiece; return;
 		case 'o':
-		case 'O': return pieceType::OPiece;
+		case 'O': type = minoType::OPiece; return;
 		case 's':
-		case 'S': return pieceType::SPiece;
+		case 'S': type = minoType::SPiece; return;
 		case 'i':
-		case 'I': return pieceType::IPiece;
+		case 'I': type = minoType::IPiece; return;
 		case 'j':
-		case 'J': return pieceType::JPiece;
+		case 'J': type = minoType::JPiece; return;
 		case 't':
-		case 'T': return pieceType::TPiece;
+		case 'T': type = minoType::TPiece; return;
 	}
 	cerr << "invalid piecename parsed\n";
 	exit(1);
 }
 
-pieceType tetPiece::	getType()
+vector<vector<bool>>tetPiece::getShape(int direction) const
 {
-	return this->_type;
+	switch(type) {
+	case minoType::ZPiece:
+		switch (direction) {
+			case 0:
+			case 2: return {{false,false,false,false},{false,true,true,false},{true,true,false,false},{false,false,false,false}};
+			case 1: return {{false,true,false,false},{false,true,true,false},{false,false,true,false},{false,false,false,false}};
+			case 3: return {{true,false,false,false},{true,true,false,false},{false,true,false,false},{false,false,false,false}};
+		}
+	case minoType::LPiece:
+		switch (direction) {
+			case 0: return {{false,false,false,false},{true,true,true,false},{false,false,true,false},{false,false,false,false}};
+			case 1: return {{false,true,true,false},{false,true,false,false},{false,true,false,false},{false,false,false,false}};
+			case 2: return {{true,false,false,false},{true,true,true,false},{false,false,false,false},{false,false,false,false}};
+			case 3: return {{false,true,false,false},{false,true,false,false},{true,true,false,false},{false,false,false,false}};
+		}
+	case minoType::OPiece:
+		switch (direction) {
+			case 0:
+			case 1:
+			case 2:
+			case 3: return {{false,false,false,false},{false,true,true,false},{false,true,true,false},{false,false,false,false}};
+		}
+	case minoType::SPiece:
+		switch (direction) {
+			case 0:
+			case 2: return {{false,false,false,false},{true,true,false,false},{false,true,true,false},{false,false,false,false}};
+			case 1: return {{false,false,true,false},{false,true,true,false},{false,true,false,false},{false,false,false,false}};
+			case 3: return {{false,true,false,false},{true,true,false,false},{true,false,false,false},{false,false,false,false}};
+		}
+	case minoType::IPiece:
+		switch (direction) {
+			case 0:
+			case 2: return {{false,false,false,false},{true,true,true,true},{false,false,false,false},{false,false,false,false}};
+			case 1: return {{false,false,true,false},{false,false,true,false},{false,false,true,false},{false,false,true,false}};
+			case 3: return {{false,true,false,false},{false,true,false,false},{false,true,false,false},{false,true,false,false}};
+		}
+	case minoType::JPiece:
+		switch (direction) {
+			case 0: return {{false,false,false,false},{true,true,true,false},{true,false,false,false},{false,false,false,false}};
+			case 1: return {{false,true,false,false},{false,true,false,false},{false,true,true,false},{false,false,false,false}};
+			case 2: return {{false,false,true,false},{true,true,true,false},{false,false,false,false},{false,false,false,false}};
+			case 3: return {{true,true,false,false},{false,true,false,false},{false,true,false,false},{false,false,false,false}};
+		}
+	case minoType::TPiece:
+		switch(direction) {
+			case 0: return {{false,false,false,false},{true,true,true,false},{false,true,false,false},{false,false,false,false}};
+			case 1: return {{false,true,false,false},{false,true,true,false},{false,true,false,false},{false,false,false,false}};
+			case 2: return {{false,true,false,false},{true,true,true,false},{false,false,false,false},{false,false,false,false}};
+			case 3: return {{false,true,false,false},{true,true,false,false},{false,true,false,false},{false,false,false,false}};
+		}
+	}
+	return {};
 }
+
+vector<int>tetPiece::lowestInEachCol(int direction) const
+{
+	switch (type) {
+		case minoType::ZPiece:
+			switch (direction) {
+				case 0:
+				case 2: return {2,1,1,4};
+				case 1: return {4,0,1,4};
+				case 3: return {0,1,4,4};
+			}
+		case minoType::LPiece:
+			switch (direction) {
+				case 0: return {1,1,1,4};
+				case 1: return {4,0,0,4};
+				case 2: return {0,1,1,4};
+				case 3: return {2,0,4,4};
+			}
+		case minoType::OPiece:
+			switch (direction) {
+				case 0:
+				case 1:
+				case 2:
+				case 3: return {4,1,1,4};
+			}
+		case minoType::SPiece:
+			switch (direction) {
+				case 0:
+				case 2: return {1,1,2,4};
+				case 1: return {4,1,0,4};
+				case 3: return {1,0,4,4};
+			}
+		case minoType::IPiece:
+			switch (direction) {
+				case 0:
+				case 2: return {1,1,1,1};
+				case 1: return {4,4,0,4};
+				case 3: return {4,0,4,4};
+			}
+		case minoType::JPiece:
+			switch (direction) {
+				case 0: return {1,1,1,4};
+				case 1: return {4,0,2,4};
+				case 2: return {1,1,0,4};
+				case 3: return {0,0,4,4};
+			}
+		case minoType::TPiece:
+			switch (direction) {
+				case 0: return {1,1,1,4};
+				case 1: return {4,0,1,4};
+				case 2: return {1,0,1,4};
+				case 3: return {1,0,4,4};
+			}
+	}
+	return {};
+}
+
+string tetPiece::getTypeName() const
+{
+	switch(type) {
+		case minoType::ZPiece:
+			return "Z";
+		case minoType::LPiece:
+			return "L";
+		case minoType::OPiece:
+			return "O";
+		case minoType::SPiece:
+			return "S";
+		case minoType::IPiece:
+			return "I";
+		case minoType::JPiece:
+			return "J";
+		case minoType::TPiece:
+			return "T";
+	}
+	return "[Invalid Piece]";
+}
+
 
 /**************/
 /***tetBoard***/
@@ -142,6 +172,7 @@ tetBoard::tetBoard(int width, int height)
 {
 	_width = width;
 	_height = height;
+	toppedOut = false;
 
 	board.resize(width*height,false);
 }
@@ -154,6 +185,7 @@ tetBoard::tetBoard(tetBoard *cpyBoard)
 {
 	_width = cpyBoard->getWidth();
 	_height = cpyBoard->getHeight();
+	toppedOut = cpyBoard->toppedOut;
 	board = cpyBoard->board;
 }
 
@@ -199,11 +231,14 @@ int tetBoard::colHeight(int x)
 
 void tetBoard::setPieceAt(int x, int y, bool val)
 {
+	if (y >= getHeight())
+		toppedOut = true;
 	board[getBoardIdx(x,y)] = val;
 }
 
 void tetBoard::emptyBoard()
 {
+	toppedOut = false;
 	for (int x = 0; x < getWidth(); x++)
 		for (int y = 0; y < getHeight(); y++)
 			setPieceAt(x,y,false);
@@ -288,6 +323,7 @@ boardInfo tetBoard::getBoardInfo()
 	info.numHoles = numHoles();
 	info.fullLines = fullLines();
 	info.bumpiness = bumpiness();
+	info.toppedOut = toppedOut;
 	return info;
 }
 
@@ -313,9 +349,30 @@ void tetBoard::printBoard()
 /***tetGame***/
 /*************/
 
+tetPiece tetGame::getHoldPiece() const
+{
+	if (!holdFilled) {
+		cout << "got bad hold piece\n";
+		exit(1);
+	}
+	return holdPiece;
+}
+
+bool tetGame::getHoldFilled() const
+{
+	return holdFilled;
+}
+
+void tetGame::setHoldPiece(tetPiece piece)
+{
+	holdFilled = true;
+	holdPiece = piece;
+}
+
 tetGame::tetGame(int width, int height)
 {
 	board = new tetBoard(width,height);
+	holdFilled = false;
 }
 void tetGame::reset()
 {
@@ -323,47 +380,45 @@ void tetGame::reset()
 	holdFilled = false;
 }
 
-int tetGame::minX(pieceType type, int direction)
+int tetGame::minX(tetPiece piece, int direction) const
 {
-	tetPiece piece = tetPiece(type);
 	vector<int> lowestInEachCol = piece.lowestInEachCol(direction);
-	if (lowestInEachCol[1] == 4)
-		return 0;
+	if (lowestInEachCol[1] == 4 && lowestInEachCol[0] == 4)
+		return -1;
 	if (lowestInEachCol[0] == 4)
-		return 1;
-	return 2;
-
+		return 0;
+	return 1;
 }
 
-int tetGame::maxX(pieceType type, int direction)
+int tetGame::maxX(tetPiece piece, int direction) const
 {
-	tetPiece piece = tetPiece(type);
 	vector<int> lowestInEachCol = piece.lowestInEachCol(direction);
-	if (lowestInEachCol[3] == 4)
+	if (lowestInEachCol[2] == 4 && lowestInEachCol[3] == 4)
 		return board->getWidth()-1;
-	return board->getWidth()-2;
+	if (lowestInEachCol[3] == 4)
+		return board->getWidth()-2;
+	return board->getWidth()-3;
 
 }
 
-bool tetGame::inBounds(pieceType type, int direction, int x)
+bool tetGame::inBounds(tetPiece piece, int direction, int x) const
 {
-	return x <= maxX(type,direction) && x >= minX(type,direction);
+	return x <= maxX(piece,direction) && x >= minX(piece,direction);
 }
 
-int tetGame::findHitRow(pieceType type, int direction, int x)
+int tetGame::findHitRow(tetPiece piece, int direction, int x) const
 {
-	tetPiece piece = tetPiece(type);
 	//leaving as an assertion for now
-	assert(inBounds(type,direction,x));
+	assert(inBounds(piece,direction,x));
 
 	vector<int> lowestInEachCol = piece.lowestInEachCol(direction);
 	int hitRow = 0;
 	for (int relCol = 0; relCol < 4; relCol++) {
-		int col = relCol-2+x;
+		int col = relCol+x+tetPiece::xOffset;
 		if (0<=col && col<board->getWidth()) {
 			int colHeight = board->colHeight(col);
 			if (lowestInEachCol[relCol] < 4) {
-				int colHitRow = colHeight - lowestInEachCol[relCol]+2;
+				int colHitRow = colHeight - lowestInEachCol[relCol]-tetPiece::yOffset;
 				hitRow = max(colHitRow,hitRow);
 			}
 		}
@@ -372,38 +427,35 @@ int tetGame::findHitRow(pieceType type, int direction, int x)
 }
 
 //board modification
-int tetGame::dropPiece(pieceType type, int direction, int x)
+int tetGame::dropPiece(tetPiece piece, int direction, int x)
 {
-	int hitRow = findHitRow(type,direction,x);
-	cout << hitRow << endl;
-	tetPiece piece = tetPiece(type);
+	int hitRow = findHitRow(piece,direction,x);
 	vector<vector<bool>> shape = piece.getShape(direction);
 	for (int row = 0; row < 4; row++)
 		for (int col = 0; col < 4; col++)
 			if (shape[row][col])
-				board->setPieceAt(x+col-2,hitRow+row-2,true);
+				board->setPieceAt(x+col+tetPiece::xOffset,hitRow+row+tetPiece::yOffset,true);
 	return board->clearFullLines();
 }
 
 int tetGame::dropPiece(tetMove move)
 {
-	return dropPiece(move.type, move.direction, move.x);
+	return dropPiece(move.piece, move.direction, move.x);
 }
 
-boardInfo tetGame::getBoardInfo()
+boardInfo tetGame::getBoardInfo() const
 {
 	return board->getBoardInfo();
 }
-boardInfo tetGame::testDrop(pieceType type, int direction, int x)
+boardInfo tetGame::testDrop(tetPiece piece, int direction, int x) const
 {
 	tetBoard testBoard(board);
 	//FIXME: copied code
-	int hitRow = findHitRow(type,direction,x);
-	tetPiece piece = tetPiece(type);
+	int hitRow = findHitRow(piece,direction,x);
 	vector<vector<bool>> shape = piece.getShape(direction);
 	for (int row = 0; row < 4; row++)
 		for (int col = 0; col < 4; col++)
 			if (shape[row][col])
-				testBoard.setPieceAt(x+col-2,hitRow+row-2,true);
+				testBoard.setPieceAt(x+col+tetPiece::xOffset,hitRow+row+tetPiece::yOffset,true);
 	return testBoard.getBoardInfo();
 }
