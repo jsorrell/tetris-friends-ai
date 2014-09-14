@@ -46,28 +46,36 @@ void tetPlayer::gameEndedCallback()
 void tetPlayer::playGame() const
 {
 	while (true) {
+		tetPiece nextPiece = getNextPiece();
 		tetMove move;
-		keySender->swapHold();
-		bool hold = tetAi::chooseMove(*game, getNextPiece(), &move);
-		if (hold)
+		bool hold = tetAi::chooseMove(*game, nextPiece, &move);
+		if (hold){
 			keySender->swapHold();
-		keySender->dropPiece(move.direction,move.x);
+			game->setHoldPiece(nextPiece);
+		}
 		cout << "drop " << move.piece << " rotated right " << move.direction << " in column " << move.x << endl;
-		this_thread::sleep_for(chrono::milliseconds(3000));
+		game->dropPiece(move);
+		game->board->printBoard();
+		keySender->dropPiece(move.direction,move.x);
+		if (game->board->toppedOut) {
+			cout << "Topped Out" << endl;
+			exit(0);
+		}
 	}
 }
 
 void tetPlayer::go()
 {
 	//play 1 game for now
-	//while(true)
-	info->captureStart();
-	//FIXME:
-	gameStartedCallback();
-	if(!(gamePid = fork())) {
-		playGame();
+	while(true){
+		info->captureStart();
+		//FIXME:
+		gameStartedCallback();
+		if(!(gamePid = fork())) {
+			playGame();
+		}
+		info->captureEnd();
+		//FIXME
+		gameEndedCallback();
 	}
-	info->captureEnd();
-	//FIXME
-	gameEndedCallback();
 }

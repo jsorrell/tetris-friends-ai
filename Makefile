@@ -1,7 +1,13 @@
-CC=g++-4.9
+#change to depend on inclded files
+CXX=g++-4.9
+HEXT=.hpp
 EXT=.cxx
-CFLAGS=-Wl,--no-as-needed -Wall -Werror -std=c++11 -g -pthread
-LDFLAGS=-lxdo -ltins
+#compile flags
+CXXFLAGS=-Wl,--no-as-needed -Wall -Werror -std=c++11 -g -pthread
+#link flags
+CXXLFLAGS=-Wall -Werror -std=c++11
+CXXFLAGS+=-MMD
+LDFLAGS=-lX11 -ltins -lXtst
 INC=-iquotesrc/include
 DIRS=bin/ obj/
 EXECDIR=bin
@@ -10,41 +16,44 @@ DIRSTAMPS := $(addsuffix .dirstamp,$(DIRS))
 SOURCES := $(wildcard src/*$(EXT))
 OBJECTS := $(addprefix obj/,$(notdir $(SOURCES:$(EXT)=.o)))
 ###coretest###
-CTSOURCES := tetCore.cxx tetCore.test.cxx
-CTOBJECTS := $(addprefix obj/,$(notdir $(CTSOURCES:$(EXT)=.o)))
+CTSOURCES := tetConstants.cxx tetCore.cxx tetCore.test.cxx
 ###aitest###
-AITSOURCES := tetCore.cxx tetAi.cxx tetAi.test.cxx
-AITOBJECTS := $(addprefix obj/,$(notdir $(AITSOURCES:$(EXT)=.o)))
+AITSOURCES := tetConstants.cxx tetCore.cxx tetAi.cxx tetAi.test.cxx
 ###infotest###
-INFTSOURCES := tetCore.cxx tetGameInfo.cxx tetCore.test.cxx
-INFTOBJECTS := $(addprefix obj/,$(notdir $(INFTSOURCES:$(EXT)=.o)))
+INFTSOURCES := tetConstants.cxx tetCore.cxx tetGameInfo.cxx tetCore.test.cxx
 ###keysendertest###
-KSTSOURCES := tetKeySender.cxx tetKeySender.test.cxx
-KSTOBJECTS := $(addprefix obj/,$(notdir $(KSTSOURCES:$(EXT)=.o)))
+KSTSOURCES := tetConstants.cxx tetKeySender.cxx tetKeySender.test.cxx
+###playertest###
+PTSOURCES := tetConstants.cxx tetKeySender.cxx tetCore.cxx tetGameInfo.cxx tetAi.cxx tetPlayer.cxx tetPlayer.test.cxx
 
-tetrisFriendsAi: $(OBJECTS)
-	$(CC) $(CFLAGS) $(INC) -o $(EXECDIR)/$@ $^ $(LDFLAGS)
+$(EXECDIR)/tetrisFriendsAi: $(OBJECTS)
+	$(CXX) $(CXXLFLAGS) -o $@ $^ $(LDFLAGS)
 
-coretest: $(CTOBJECTS)
-	$(CC) $(CFLAGS) $(INC) -o $(EXECDIR)/$@ $^ $(LDFLAGS)
+$(EXECDIR)/coretest: $(addprefix obj/,$(notdir $(CTSOURCES:$(EXT)=.o)))
+	$(CXX) $(CXXLFLAGS) -o $@ $^ $(LDFLAGS)
 
-aitest: $(AITOBJECTS)
-	$(CC) $(CFLAGS) $(INC) -o $(EXECDIR)/$@ $^ $(LDFLAGS)
+$(EXECDIR)/aitest: $(addprefix obj/,$(notdir $(AITSOURCES:$(EXT)=.o)))
+	$(CXX) $(CXXLFLAGS) -o $@ $^ $(LDFLAGS)
 
-infotest: $(INFTOBJECTS)
-	$(CC) $(CFLAGS) $(INC) -o $(EXECDIR)/$@ $^ $(LDFLAGS)
+$(EXECDIR)/infotest: $(addprefix obj/,$(notdir $(INFTSOURCES:$(EXT)=.o)))
+	$(CXX) $(CXXLFLAGS) -o $@ $^ $(LDFLAGS)
 
-keysendertest: $(KSTOBJECTS)
-	$(CC) $(CFLAGS) $(INC) -o $(EXECDIR)/$@ $^ $(LDFLAGS)
+$(EXECDIR)/keysendertest: $(addprefix obj/,$(notdir $(KSTSOURCES:$(EXT)=.o)))
+	$(CXX) $(CXXLFLAGS) -o $@ $^ $(LDFLAGS)
+
+$(EXECDIR)/playertest: $(addprefix obj/,$(notdir $(PTSOURCES:$(EXT)=.o)))
+	$(CXX) $(CXXLFLAGS) -o $@ $^ $(LDFLAGS)
 
 obj/%.o: src/%.cxx $(DIRSTAMPS)
-	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<
 obj/%.test.o: src/test/%.test.cxx $(DIRSTAMPS)
-	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<
 
 $(DIRSTAMPS):
 	mkdir -p $(@D)
 	touch $@
+
+-include $(wildcard obj/*.d)
 
 clean:
 	rm -rf $(DIRS)

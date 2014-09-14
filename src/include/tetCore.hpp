@@ -5,9 +5,9 @@
 #include <string>
 #include <iostream>
 #include <algorithm>
-//TODO:
 #include <cassert>
 #include <type_traits>
+#include "tetConstants.hpp"
 using namespace std;
 
 namespace Tetris {
@@ -28,7 +28,6 @@ private:
 	enum minoType {ZPiece,LPiece,OPiece,SPiece,IPiece,JPiece,TPiece};
 	minoType type;
 };
-
 
 /* End Pieces */
 

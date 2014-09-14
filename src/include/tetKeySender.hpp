@@ -3,10 +3,12 @@
 #include <thread>
 #include <chrono>
 #include <iostream>
+#include <ctime>
 #include <vector>
-extern "C" {
-#include <xdo.h>
-}
+#include <X11/Xlib.h>
+#include <X11/keysym.h>
+#include <X11/extensions/XTest.h>
+#include "tetConstants.hpp"
 
 using namespace std;
 
@@ -18,10 +20,8 @@ public:
 	void dropPiece(int rotation, int col);
 	void swapHold();
 private:
-	void sendKeySequence();
-	void appendToKeySeq(const string key);
-	xdo_t *xdo;
-	static const int centerColumn = 4;
-	vector <string> keyseq;
+	void sendKeyTime(unsigned keysym, int time);
+	void sendKeyEvent(unsigned keysym, bool press);
+	Display *display;
 };
 }

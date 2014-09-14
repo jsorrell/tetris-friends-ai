@@ -1,3 +1,6 @@
+#ifndef __TET_PLAYER_H__
+#define __TET_PLAYER_H__
+
 #include <unistd.h>
 #include <sys/types.h>
 #include <signal.h>
@@ -6,6 +9,7 @@
 #include "tetCore.hpp"
 #include "tetKeySender.hpp"
 #include "tetGameInfo.hpp"
+#include "tetConstants.hpp"
 
 namespace Tetris {
 class tetPlayer
@@ -28,3 +32,4 @@ private:
 	vector<tetPiece> pieceBuf;
 };
 }
+#endif

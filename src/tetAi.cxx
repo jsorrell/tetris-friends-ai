@@ -33,7 +33,7 @@ double tetAi::calculateValue(boardInfo info)
 }
 
 bool tetAi::chooseMove(const tetGame &game, const tetPiece piece, tetMove *output)
-{
+{//TODO: allow use of hold on first piece
 	int directionPriority[4] = {0,1,3,2};
 	double curVal = -DBL_MAX;
 	bool usingHold;

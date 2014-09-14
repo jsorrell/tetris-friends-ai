@@ -10,6 +10,7 @@
 #include <cassert>
 #include <cfloat>
 #include "tetCore.hpp"
+#include "tetConstants.hpp"
 
 using namespace std;
 using namespace Tetris;

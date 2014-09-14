@@ -1,15 +1,24 @@
 #include "tetGameInfo.hpp"
+using namespace std;
 using namespace Tetris;
+using namespace Tins;
 
 ///////////////Packet Sniffer//////////////////////
 /* Function for handling a packet */
 
-tetGameInfo::tetGameInfo(string adaptor)
+tetGameInfo::tetGameInfo(string intf)
 {
+  this->interface = intf;
   SnifferConfiguration config;
-  config.set_filter("tcp and port 9339");
+  config.set_filter(tetConstants::listen_filter);
   config.set_promisc_mode(false);
-  lineSniffer = new Sniffer(adaptor,config);
+  lineSniffer = new Sniffer(this->interface,config);
+}
+
+//no sniffer data, for testing
+tetGameInfo::tetGameInfo(int seed)
+{
+  this->rand = new tetRandomPieceGen(seed);
 }
 
 tetGameInfo::~tetGameInfo()
@@ -19,9 +28,7 @@ tetGameInfo::~tetGameInfo()
 
 bool tetGameInfo::startGameHandler(PDU &pdu)
 {
-  const regex rSeed("<var n='seed' t='n'>(\\d+)</var>"); //also start
-
-  /* Check if there is a payload */
+  const regex rSeed(tetConstants::start_game_regex); //also start
   const vector<uint8_t> raw_payload = pdu.rfind_pdu<RawPDU>().payload();
   string payload(raw_payload.begin(), raw_payload.end());
 
@@ -29,7 +36,7 @@ bool tetGameInfo::startGameHandler(PDU &pdu)
   if(regex_search(payload,mSeed,rSeed)){
     int seed = strtol(mSeed[1].str().c_str(),NULL,10);
     this->rand = new tetRandomPieceGen(seed);
-    this_thread::sleep_for(chrono::milliseconds(tetGameInfo::msDelayFromStart));
+    this_thread::sleep_for(chrono::milliseconds(tetConstants::wait_to_play_first_piece_ms));
     if (this->gameStartedCallback){
       thread gameStarted(this->gameStartedCallback);
       gameStarted.detach();
@@ -41,9 +48,7 @@ bool tetGameInfo::startGameHandler(PDU &pdu)
 
 bool tetGameInfo::endGameHandler(PDU &pdu)
 {
-  const regex rGameEnded("%xt%TetrisLive%results%"); //also start
-
-  /* Check if there is a payload */
+  const regex rGameEnded(tetConstants::end_game_regex);
   const vector<uint8_t> raw_payload = pdu.rfind_pdu<RawPDU>().payload();
   string payload(raw_payload.begin(), raw_payload.end());
 
@@ -61,8 +66,8 @@ bool tetGameInfo::endGameHandler(PDU &pdu)
 
 bool tetGameInfo::lineHandler(PDU &pdu)
 {
-  const regex rAttackReceived("%xt%lineAttack%\\d+%(\\d+)%");
-  const regex rAttackSent("%xt%TetrisLive%lineAttack%\\d+%\\d+%(\\d+)%");
+  const regex rAttackReceived(tetConstants::line_received_regex);
+  const regex rAttackSent(tetConstants::line_sent_regex);
 
   /* Check if there is a payload */
   const vector<uint8_t> raw_payload = pdu.rfind_pdu<RawPDU>().payload();
@@ -92,9 +97,9 @@ bool tetGameInfo::lineHandler(PDU &pdu)
 void tetGameInfo::captureStart()
 {
   SnifferConfiguration config;
-  config.set_filter("tcp and port 9339");
+  config.set_filter(tetConstants::listen_filter);
   config.set_promisc_mode(false);
-  Sniffer startGameSniffer("wlan0",config);
+  Sniffer startGameSniffer(interface,config);
   startGameSniffer.sniff_loop(make_sniffer_handler(this, &tetGameInfo::startGameHandler));
 }
 void tetGameInfo::captureStartAsync()
@@ -106,9 +111,9 @@ void tetGameInfo::captureStartAsync()
 void tetGameInfo::captureEnd()
 {
   SnifferConfiguration config;
-  config.set_filter("tcp and port 9339");
+  config.set_filter(tetConstants::listen_filter);
   config.set_promisc_mode(false);
-  Sniffer endGameSniffer("wlan0",config);
+  Sniffer endGameSniffer(interface,config);
   endGameSniffer.sniff_loop(make_sniffer_handler(this, &tetGameInfo::endGameHandler));
 }
 void tetGameInfo::captureEndAsync()
@@ -160,7 +165,7 @@ vector <tetPiece> tetGameInfo::getNextBag()
     } while (refillSlots[pieceId]);
     //found one not made yet
     refillSlots[pieceId] = true;
-    string type = pieceMap[pieceId];
+    string type = tetConstants::piecegen_map[pieceId];
     tetPiece piece(type);
     //put in bag
     bag.push_back(piece);
