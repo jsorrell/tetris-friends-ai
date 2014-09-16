@@ -1,4 +1,7 @@
 #include "tetPlayer.hpp"
+#include "tetConstants.hpp"
+
+using namespace Tetris;
 
 int main(int argc, char *argv[])
 {

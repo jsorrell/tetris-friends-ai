@@ -1,27 +1,21 @@
-#include <X11/Xlib.h>
-#include <X11/keysym.h>
-#include <thread>
-#include <chrono>
-#include <iostream>
-#include <ctime>
-#include <vector>
-#include <X11/Xlib.h>
-#include <X11/keysym.h>
-#include <X11/extensions/XTest.h>
-#include "tetConstants.hpp"
+#ifndef __TET_KEY_SENDER_H__
+#define __TET_KEY_SENDER_H__
 
-using namespace std;
+#include <memory>
 
-namespace Tetris {
+namespace Tetris
+{
 
-class tetKeySender {
+class tetKeySender
+{
 public:
 	tetKeySender();
+	tetKeySender(const tetKeySender&);
+  ~tetKeySender();
 	void dropPiece(int rotation, int col);
 	void swapHold();
 private:
-	void sendKeyTime(unsigned keysym, int time);
-	void sendKeyEvent(unsigned keysym, bool press);
-	Display *display;
+	struct impl; std::unique_ptr<impl> pimpl;
 };
 }
+#endif

@@ -1,35 +1,51 @@
 #include "tetAi.hpp"
+#include "tetConstants.hpp"
+#include <vector>
+#include <cfloat>
 
+using namespace std;
 using namespace Tetris;
 
-double tetAi::calculateValue(boardInfo info)
-{
-	if (info.toppedOut)
-	 	return -100000.;
-	double a = -0.66569;
-	double b = 0.99275;
-	//double c = -0.46544;
-	double c = -3.;
-	double d = -0.24077;
-	int linesClearedEquiv;
-	switch (info.fullLines) {
-		case 0:
-			linesClearedEquiv = 0.;
-			break;
-		case 1:
-			linesClearedEquiv = -3.;
-			break;
-		case 2:
-			linesClearedEquiv = 1.;
-			break;
-		case 3:
-			linesClearedEquiv = 20.;
-			break;
-		case 4:
-			linesClearedEquiv = 1000.;
-			break;
+struct tetAi::impl {
+	static double calculateValue(boardInfo info)
+	{
+		if (info.toppedOut)
+		 	return -100000.;
+		double a = -0.66569;
+		double b = 0.99275;
+		double c = -0.46544;
+		//double c = -3.;
+		double d = -0.24077;
+		//int linesClearedEquiv;
+		// switch (info.fullLines) {
+		// 	case 0:
+		// 		linesClearedEquiv = 0.;
+		// 		break;
+		// 	case 1:
+		// 		linesClearedEquiv = -3.;
+		// 		break;
+		// 	case 2:
+		// 		linesClearedEquiv = 1.;
+		// 		break;
+		// 	case 3:
+		// 		linesClearedEquiv = 20.;
+		// 		break;
+		// 	case 4:
+		// 		linesClearedEquiv = 1000.;
+		// 		break;
+		// }
+		return a*(double)info.aggHeight+b*(double)info.fullLines+c*(double)info.numHoles+d*(double)info.bumpiness;
 	}
-	return a*(double)info.aggHeight+b*linesClearedEquiv+c*(double)info.numHoles+d*(double)info.bumpiness;
+};
+
+tetAi::tetAi(): pimpl(new impl)
+{
+
+}
+
+tetAi::~tetAi()
+{
+
 }
 
 bool tetAi::chooseMove(const tetGame &game, const tetPiece piece, tetMove *output)
@@ -51,7 +67,7 @@ bool tetAi::chooseMove(const tetGame &game, const tetPiece piece, tetMove *outpu
 			int maxX = game.maxX(tryPiece,direction);
 			for (int x = minX; x <= maxX; x++) {
 				boardInfo info = game.testDrop(tryPiece,direction,x);
-				double value = calculateValue(info);
+				double value = impl::	calculateValue(info);
 				if (value > curVal) {
 					curVal = value;
 					output->piece = tryPiece;

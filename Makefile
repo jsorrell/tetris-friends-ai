@@ -5,7 +5,7 @@ EXT=.cxx
 #compile flags
 CXXFLAGS=-Wl,--no-as-needed -Wall -Werror -std=c++11 -g -pthread
 #link flags
-CXXLFLAGS=-Wall -Werror -std=c++11
+CXXLFLAGS=-Wall -Werror -std=c++11 -pthread
 CXXFLAGS+=-MMD
 LDFLAGS=-lX11 -ltins -lXtst
 INC=-iquotesrc/include
@@ -20,7 +20,7 @@ CTSOURCES := tetConstants.cxx tetCore.cxx tetCore.test.cxx
 ###aitest###
 AITSOURCES := tetConstants.cxx tetCore.cxx tetAi.cxx tetAi.test.cxx
 ###infotest###
-INFTSOURCES := tetConstants.cxx tetCore.cxx tetGameInfo.cxx tetCore.test.cxx
+INFTSOURCES := tetConstants.cxx tetCore.cxx tetGameInfo.cxx tetGameInfo.test.cxx
 ###keysendertest###
 KSTSOURCES := tetConstants.cxx tetKeySender.cxx tetKeySender.test.cxx
 ###playertest###

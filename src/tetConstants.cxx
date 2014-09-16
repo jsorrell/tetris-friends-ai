@@ -16,8 +16,8 @@ const int tetConstants::keypress_duration_ms = 80;
 // const int tetConstants::pause_between_keypresses_ms = 80;
 const int tetConstants::wait_to_play_first_piece_ms = 3300;
 const int tetConstants::key_hold_time_ms[6] = {0,100,190,240,310,500};
-const int tetConstants::switch_key_pause_ms = 45;
-const int tetConstants::pause_between_drops_ms = 200;//80
+const int tetConstants::switch_key_pause_ms = 0;//40;
+const int tetConstants::pause_between_drops_ms = 0;//100;//80
 //tetPieces Declaration
 const int tetConstants::x_offset = -1;
 const int tetConstants::y_offset = -2;

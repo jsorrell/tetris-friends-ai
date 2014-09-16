@@ -1,5 +1,8 @@
+#include <chrono>
+#include <thread>
 #include "tetKeySender.hpp"
 
+using namespace std;
 using namespace Tetris;
 
 void t1(tetKeySender ks)
