@@ -4,23 +4,18 @@
 #include <vector>
 #include <string>
 #include <iostream>
-#include <algorithm>
-#include <cassert>
-#include <type_traits>
-#include "tetConstants.hpp"
-using namespace std;
 
 namespace Tetris {
 
 /* Pieces */
 class tetPiece {
 public:
-	tetPiece(string typeName);
-	vector<vector<bool>>getShape(int direction) const;
-	vector<int>lowestInEachCol(int direction) const;
-	string getTypeName() const;
-	friend ostream& operator<<(ostream &out, const tetPiece&x){out << x.getTypeName(); return out;};
-	inline bool operator==(const tetPiece& rhs){return this->type == rhs.type;}
+	tetPiece(std::string typeName);
+	std::vector<std::vector<bool>>getShape(int direction) const;
+	std::vector<int>lowestInEachCol(int direction) const;
+	std::string getTypeName() const;
+	friend std::ostream& operator<<(std::ostream &out, const tetPiece&x){out << x.getTypeName(); return out;};
+	inline bool operator==(const tetPiece& rhs){return this->type==rhs.type;}
 	inline bool operator!=(const tetPiece& rhs){return !(this->type==rhs.type);}
 	static const int xOffset = -1;
 	static const int yOffset = -2;
@@ -72,10 +67,10 @@ public:
 private:
 	int _width;
 	int _height;
-	vector<bool> board; //idx = row*width+col
+	std::vector<bool> board; //idx = row*width+col
 	int getBoardIdx(int x,int y);
-	vector<bool> getRow(int y);
-	vector<bool> getCol(int x);
+	std::vector<bool> getRow(int y);
+	std::vector<bool> getCol(int x);
 	void removeRow(int y);
 };
 

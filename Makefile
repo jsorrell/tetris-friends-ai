@@ -1,12 +1,11 @@
-#change to depend on inclded files
 CXX=g++-4.9
 HEXT=.hpp
 EXT=.cxx
 #compile flags
-CXXFLAGS=-Wl,--no-as-needed -Wall -Werror -std=c++11 -g -pthread
+CXXFLAGS=-Wl,--no-as-needed -Wall -Werror -std=c++11 -g -pthread -MMD
 #link flags
 CXXLFLAGS=-Wall -Werror -std=c++11 -pthread
-CXXFLAGS+=-MMD
+CXXFLAGS+=
 LDFLAGS=-lX11 -ltins -lXtst
 INC=-iquotesrc/include
 DIRS=bin/ obj/

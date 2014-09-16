@@ -5,7 +5,7 @@
 using namespace std;
 using namespace Tetris;
 
-void t1(tetKeySender ks)
+void t1(const tetKeySender &ks)
 {
 	this_thread::sleep_for(chrono::milliseconds(5000));
 	ks.dropPiece(0,4);
@@ -13,11 +13,11 @@ void t1(tetKeySender ks)
 	ks.dropPiece(2,9);
 }
 
-void t2(tetKeySender ks)
+void t2(const tetKeySender &ks)
 {
 }
 
-void t3(tetKeySender ks)
+void t3(const tetKeySender &ks)
 {
 	this_thread::sleep_for(chrono::milliseconds(5000));
 	ks.dropPiece(1,0);

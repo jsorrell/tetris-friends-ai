@@ -9,7 +9,7 @@ namespace Tetris {
 
 class tetGameInfo {
 public:
-	tetGameInfo(string adaptor);
+	tetGameInfo(std::string adaptor);
 	tetGameInfo(int seed);
 	~tetGameInfo();
 	void captureStart();

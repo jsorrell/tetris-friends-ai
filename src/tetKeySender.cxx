@@ -53,16 +53,11 @@ tetKeySender::tetKeySender() : pimpl(new impl)
 	pimpl->display = XOpenDisplay(NULL);
 }
 
-tetKeySender::tetKeySender(const tetKeySender&) : pimpl(new impl)
-{
-	pimpl->display = XOpenDisplay(NULL);
-}
-
 tetKeySender::~tetKeySender()
 {
 }
 
-void tetKeySender::dropPiece(int rotation, int col)
+void tetKeySender::dropPiece(int rotation, int col) const
 {
 	cout << "dropPiece rotated right " << rotation << " in column " << col << endl;
 	switch(rotation) {
@@ -89,7 +84,7 @@ void tetKeySender::dropPiece(int rotation, int col)
 	}
 	pimpl->sendKeyTime(tetConstants::drop_key,tetConstants::switch_key_pause_ms,tetConstants::key_hold_time_ms[1]);
 }
-void tetKeySender::swapHold()
+void tetKeySender::swapHold() const
 {
 	pimpl->sendKeyTime(tetConstants::hold_key,tetConstants::pause_between_drops_ms,tetConstants::key_hold_time_ms[1]);
 }

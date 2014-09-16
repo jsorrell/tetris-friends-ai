@@ -1,4 +1,8 @@
+#include <algorithm>
+#include <cassert>
 #include "tetCore.hpp"
+#include "tetConstants.hpp"
+
 
 using namespace std;
 using namespace Tetris;

@@ -1,49 +1,21 @@
+#include <unistd.h>
+#include <sys/types.h>
+#include <vector>
+#include "tetCore.hpp"
+#include <signal.h>
 #include "tetPlayer.hpp"
+#include "tetAi.hpp"
+#include "tetConstants.hpp"
+#include "tetKeySender.hpp"
+#include "tetGameInfo.hpp"
 
+using namespace std;
 using namespace Tetris;
 
-tetPlayer::tetPlayer(string interface)
+struct tetPlayer::impl
 {
-	info = new tetGameInfo(interface);
-	game = new tetGame(10,20);
-	keySender = new tetKeySender();
-}
 
-tetPlayer::~tetPlayer()
-{
-}
-
-tetPiece tetPlayer::getNextPiece() const
-{
-	static vector<tetPiece>pieceBuf = {};
-	if (!gameStarted) {
-		cerr << "Don't know pieces until game starts\n";
-		tetPiece piece("Z");
-		return piece;
-	}
-	if (pieceBuf.empty()) {
-		pieceBuf = info->getNextBag();
-	}
-	tetPiece nextPiece = pieceBuf.front();
-	pieceBuf.erase(pieceBuf.begin());
-
-	return nextPiece;
-}
-
-void tetPlayer::gameStartedCallback()
-{
-	gameStarted = true;
-}
-
-void tetPlayer::gameEndedCallback()
-{
-	kill(gamePid,SIGTERM);
-	game->reset();
-	gameStarted = false;
-	pieceBuf = {};
-}
-
-void tetPlayer::playGame() const
+void playGame() const
 {
 	while (true) {
 		tetPiece nextPiece = getNextPiece();
@@ -64,18 +36,68 @@ void tetPlayer::playGame() const
 	}
 }
 
+tetPiece getNextPiece() const
+{
+	static vector<tetPiece>pieceBuf = {};
+	if (!gameStarted) {
+		cerr << "Don't know pieces until game starts\n";
+		tetPiece piece("Z");
+		return piece;
+	}
+	if (pieceBuf.empty()) {
+		pieceBuf = info->getNextBag();
+	}
+	tetPiece nextPiece = pieceBuf.front();
+	pieceBuf.erase(pieceBuf.begin());
+
+	return nextPiece;
+}
+
+void gameStartedCallback()
+{
+	gameStarted = true;
+}
+
+void gameEndedCallback()
+{
+	kill(gamePid,SIGTERM);
+	game->reset();
+	gameStarted = false;
+	pieceBuf = {};
+}
+tetGame *game;
+tetGameInfo *info;
+tetKeySender *keySender;
+bool gameStarted = false;
+int gamePid;
+std::vector<tetPiece> pieceBuf;
+};
+
+tetPlayer::tetPlayer(string interface) : pimpl(new impl)
+{
+	pimpl->info = new tetGameInfo(interface);
+	pimpl->game = new tetGame(10,20);
+	pimpl->keySender = new tetKeySender();
+}
+
+tetPlayer::~tetPlayer()
+{
+	pimpl.reset();
+	pimpl.release();
+}
+
 void tetPlayer::go()
 {
 	//play 1 game for now
 	while(true){
-		info->captureStart();
+		pimpl->info->captureStart();
 		//FIXME:
-		gameStartedCallback();
-		if(!(gamePid = fork())) {
-			playGame();
+		pimpl->gameStartedCallback();
+		if(!(pimpl->gamePid = fork())) {
+			pimpl->playGame();
 		}
-		info->captureEnd();
+		pimpl->info->captureEnd();
 		//FIXME
-		gameEndedCallback();
+		pimpl->gameEndedCallback();
 	}
 }

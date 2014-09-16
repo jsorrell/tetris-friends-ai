@@ -10,10 +10,9 @@ class tetKeySender
 {
 public:
 	tetKeySender();
-	tetKeySender(const tetKeySender&);
   ~tetKeySender();
-	void dropPiece(int rotation, int col);
-	void swapHold();
+	void dropPiece(int rotation, int col) const;
+	void swapHold() const;
 private:
 	struct impl; std::unique_ptr<impl> pimpl;
 };
