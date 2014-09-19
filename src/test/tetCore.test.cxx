@@ -1,4 +1,5 @@
 #include "tetCore.hpp"
+using namespace std;
 using namespace Tetris;
 
 int main()

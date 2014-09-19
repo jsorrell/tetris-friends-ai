@@ -7,7 +7,7 @@ namespace Tetris {
 class tetPlayer
 {
 public:
-	tetPlayer(const std::string interface);
+	tetPlayer(const std::string intr);
 	~tetPlayer();
 	void go();
 

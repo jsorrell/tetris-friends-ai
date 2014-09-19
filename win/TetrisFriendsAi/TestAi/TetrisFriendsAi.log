@@ -1,0 +1,20 @@
+﻿Build started 9/17/2014 6:51:59 PM.
+     1>Project "C:\Users\Jack\Dropbox\Projects\tetrisfriends\win\TetrisFriendsAi\TetrisFriendsAi.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\Jack\Dropbox\Projects\tetrisfriends\lib\include /IC:\Users\Jack\Dropbox\Projects\tetrisfriends\src\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"TestAi\\" /Fd"TestAi\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\src\test\tetAi.test.cxx
+         tetAi.test.cxx
+     1>c:\users\jack\dropbox\projects\tetrisfriends\src\test\tetai.test.cxx(16): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\Jack\Dropbox\Projects\tetrisfriends\src\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"TestAi\\" /Fd"TestAi\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt tetAi.cxx tetCore.cxx
+         tetCore.cxx
+         tetAi.cxx
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Jack\Dropbox\Projects\tetrisfriends\win\TetrisFriendsAi\TestAi\TetrisFriendsAi.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Jack\Dropbox\Projects\tetrisfriends\win\TetrisFriendsAi\TestAi\TetrisFriendsAi.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Jack\Dropbox\Projects\tetrisfriends\win\TetrisFriendsAi\TestAi\TetrisFriendsAi.lib" /MACHINE:X86 TestAi\tetAi.test.obj
+         TestAi\tetAi.obj
+         TestAi\tetCore.obj
+         TetrisFriendsAi.vcxproj -> C:\Users\Jack\Dropbox\Projects\tetrisfriends\win\TetrisFriendsAi\TestAi\TetrisFriendsAi.exe
+     1>Done Building Project "C:\Users\Jack\Dropbox\Projects\tetrisfriends\win\TetrisFriendsAi\TetrisFriendsAi.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:05.78

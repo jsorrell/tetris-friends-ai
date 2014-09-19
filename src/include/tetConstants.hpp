@@ -15,10 +15,10 @@ struct tetConstants {
 	static const unsigned hold_key;
 	//Timings
 	static const int keypress_duration_ms;
-	// static const int pause_between_keypresses_ms;
 	static const int pause_between_drops_ms;
   static const int wait_to_play_first_piece_ms;
-  static const int key_hold_time_ms[6];
+  static const int pause_between_keypresses_ms;
+  static const int pause_after_clear_ms;
   static const int switch_key_pause_ms;
 	//tetPieces Declaration
 	static const int x_offset;

@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30324.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TetrisFriendsAi", "TetrisFriendsAi.vcxproj", "{AC2908CD-C714-4FD0-8E01-B29B581C9521}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		PlayerTest|Win32 = PlayerTest|Win32
+		PlayerTest|x64 = PlayerTest|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+		TestAi|Win32 = TestAi|Win32
+		TestAi|x64 = TestAi|x64
+		TestCore|Win32 = TestCore|Win32
+		TestCore|x64 = TestCore|x64
+		TestGameInfo|Win32 = TestGameInfo|Win32
+		TestGameInfo|x64 = TestGameInfo|x64
+		TestKeySender|Win32 = TestKeySender|Win32
+		TestKeySender|x64 = TestKeySender|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.Debug|Win32.Build.0 = Debug|Win32
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.Debug|x64.ActiveCfg = Debug|x64
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.Debug|x64.Build.0 = Debug|x64
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.PlayerTest|Win32.ActiveCfg = PlayerTest|Win32
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.PlayerTest|Win32.Build.0 = PlayerTest|Win32
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.PlayerTest|x64.ActiveCfg = PlayerTest|x64
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.PlayerTest|x64.Build.0 = PlayerTest|x64
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.Release|Win32.ActiveCfg = Release|Win32
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.Release|Win32.Build.0 = Release|Win32
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.Release|x64.ActiveCfg = Release|x64
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.Release|x64.Build.0 = Release|x64
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.TestAi|Win32.ActiveCfg = TestAi|Win32
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.TestAi|Win32.Build.0 = TestAi|Win32
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.TestAi|x64.ActiveCfg = TestAi|x64
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.TestAi|x64.Build.0 = TestAi|x64
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.TestCore|Win32.ActiveCfg = TestCore|Win32
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.TestCore|Win32.Build.0 = TestCore|Win32
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.TestCore|x64.ActiveCfg = TestCore|x64
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.TestCore|x64.Build.0 = TestCore|x64
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.TestGameInfo|Win32.ActiveCfg = TestGameInfo|Win32
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.TestGameInfo|Win32.Build.0 = TestGameInfo|Win32
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.TestGameInfo|x64.ActiveCfg = TestGameInfo|x64
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.TestGameInfo|x64.Build.0 = TestGameInfo|x64
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.TestKeySender|Win32.ActiveCfg = TestKeySender|Win32
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.TestKeySender|Win32.Build.0 = TestKeySender|Win32
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.TestKeySender|x64.ActiveCfg = TestKeySender|x64
+		{AC2908CD-C714-4FD0-8E01-B29B581C9521}.TestKeySender|x64.Build.0 = TestKeySender|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

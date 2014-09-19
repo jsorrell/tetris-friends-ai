@@ -1,8 +1,10 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <vector>
-#include "tetCore.hpp"
+#include <thread>
+#include <chrono>
 #include <signal.h>
+#include "tetCore.hpp"
 #include "tetPlayer.hpp"
 #include "tetAi.hpp"
 #include "tetConstants.hpp"
@@ -26,13 +28,15 @@ void playGame() const
 			game->setHoldPiece(nextPiece);
 		}
 		cout << "drop " << move.piece << " rotated right " << move.direction << " in column " << move.x << endl;
-		game->dropPiece(move);
+		int linesCleared = game->dropPiece(move);
 		game->board->printBoard();
 		keySender->dropPiece(move.direction,move.x);
 		if (game->board->toppedOut) {
 			cout << "Topped Out" << endl;
 			exit(0);
 		}
+		if (linesCleared)
+			this_thread::sleep_for(chrono::milliseconds(tetConstants::pause_after_clear_ms));
 	}
 }
 
@@ -64,6 +68,7 @@ void gameEndedCallback()
 	game->reset();
 	gameStarted = false;
 	pieceBuf = {};
+	cout << "Game Over\n";
 }
 tetGame *game;
 tetGameInfo *info;

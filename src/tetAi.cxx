@@ -52,14 +52,14 @@ bool tetAi::chooseMove(const tetGame &game, const tetPiece piece, tetMove *outpu
 {//TODO: allow use of hold on first piece
 	int directionPriority[4] = {0,1,3,2};
 	double curVal = -DBL_MAX;
-	bool usingHold;
+	bool usingHold = false;
 	tetPiece tryPiece = piece;
-	for (int i = 0; i < 2; i++){
-		if (i == 1){
-			if (game.getHoldFilled() && tryPiece != game.getHoldPiece()) {
-					tryPiece = game.getHoldPiece();
-				} else break;
-		}
+	//for (int i = 0; i < 2; i++){
+		// if (i == 1){
+		// 	if (game.getHoldFilled() && tryPiece != game.getHoldPiece()) {
+		// 			tryPiece = game.getHoldPiece();
+		// 		} else break;
+		// }
 
 		for (int d = 0; d<4; d++) {
 			int direction = directionPriority[d];
@@ -73,11 +73,11 @@ bool tetAi::chooseMove(const tetGame &game, const tetPiece piece, tetMove *outpu
 					output->piece = tryPiece;
 					output->direction = direction;
 					output->x = x;
-					if (i == 1)
-						usingHold = true;
+					// if (i == 1)
+					// 	usingHold = true;
 				}
 			}
 		}
-	}
+//	}
 	return usingHold;
 }

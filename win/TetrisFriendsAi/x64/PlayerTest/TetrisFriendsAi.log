@@ -1,0 +1,41 @@
+﻿Build started 9/18/2014 12:50:04 AM.
+     1>Project "C:\Users\Jack\Dropbox\Projects\tetrisfriends\win\TetrisFriendsAi\TetrisFriendsAi.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /IC:\Users\Jack\Dropbox\Projects\tetrisfriends\src\include /IC:\Users\Jack\Dropbox\Projects\tetrisfriends\lib\include /Zi /nologo /W3 /WX- /sdl /Od /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _SCL_SECURE_NO_WARNINGS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\PlayerTest\\" /Fd"x64\PlayerTest\vc120.pdb" /Gd /TP /errorReport:prompt tetGameInfo.cxx
+         tetGameInfo.cxx
+     1>c:\users\jack\dropbox\projects\tetrisfriends\lib\include\tins\dot11/dot11_data.h(250): warning C4267: 'return' : conversion from 'size_t' to 'uint32_t', possible loss of data
+     1>c:\users\jack\dropbox\projects\tetrisfriends\lib\include\tins\dot11/dot11_control.h(147): warning C4267: 'return' : conversion from 'size_t' to 'uint32_t', possible loss of data
+     1>c:\users\jack\dropbox\projects\tetrisfriends\lib\include\tins\rawpdu.h(134): warning C4267: 'return' : conversion from 'size_t' to 'uint32_t', possible loss of data
+     1>c:\users\jack\dropbox\projects\tetrisfriends\lib\include\tins\pppoe.h(243): warning C4267: '+=' : conversion from 'size_t' to 'uint16_t', possible loss of data
+     1>c:\users\jack\dropbox\projects\tetrisfriends\lib\include\tins\pdu_option.h(495): warning C4244: '=' : conversion from 'std::iterator_traits<_InIt>::difference_type' to 'uint16_t', possible loss of data
+                 with
+                 [
+                     _InIt=Tins::IPv6Address::const_iterator
+                 ]
+                 c:\users\jack\dropbox\projects\tetrisfriends\lib\include\tins\pdu_option.h(377) : see reference to function template instantiation 'void Tins::PDUOption<uint8_t,Tins::DHCP>::set_payload_contents<const Tins::PDUOption<uint8_t,Tins::DHCP>::data_type*>(ForwardIterator,ForwardIterator)' being compiled
+                 with
+                 [
+                     ForwardIterator=const Tins::PDUOption<uint8_t,Tins::DHCP>::data_type *
+                 ]
+                 c:\users\jack\dropbox\projects\tetrisfriends\lib\include\tins\pdu_option.h(377) : see reference to function template instantiation 'void Tins::PDUOption<uint8_t,Tins::DHCP>::set_payload_contents<const Tins::PDUOption<uint8_t,Tins::DHCP>::data_type*>(ForwardIterator,ForwardIterator)' being compiled
+                 with
+                 [
+                     ForwardIterator=const Tins::PDUOption<uint8_t,Tins::DHCP>::data_type *
+                 ]
+                 c:\users\jack\dropbox\projects\tetrisfriends\lib\include\tins\pdu_option.h(370) : while compiling class template member function 'Tins::PDUOption<uint8_t,Tins::DHCP> &Tins::PDUOption<uint8_t,Tins::DHCP>::operator =(const Tins::PDUOption<uint8_t,Tins::DHCP> &)'
+                 c:\users\jack\dropbox\projects\tetrisfriends\lib\include\tins\pdu_option.h(325) : see reference to function template instantiation 'Tins::PDUOption<uint8_t,Tins::DHCP> &Tins::PDUOption<uint8_t,Tins::DHCP>::operator =(const Tins::PDUOption<uint8_t,Tins::DHCP> &)' being compiled
+                 c:\users\jack\dropbox\projects\tetrisfriends\lib\include\tins\dhcp.h(210) : see reference to class template instantiation 'Tins::PDUOption<uint8_t,Tins::DHCP>' being compiled
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Jack\Dropbox\Projects\tetrisfriends\win\TetrisFriendsAi\x64\PlayerTest\TetrisFriendsAi.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\Users\Jack\Dropbox\Projects\tetrisfriends\lib\lib\x64 /LIBPATH:C:\Users\Jack\Dropbox\Projects\tetrisfriends\lib\lib tinsDebug.lib Ws2_32.lib Iphlpapi.lib wpcap.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Jack\Dropbox\Projects\tetrisfriends\win\TetrisFriendsAi\x64\PlayerTest\TetrisFriendsAi.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Jack\Dropbox\Projects\tetrisfriends\win\TetrisFriendsAi\x64\PlayerTest\TetrisFriendsAi.lib" /MACHINE:X64 x64\PlayerTest\tetPlayer.test.obj
+         x64\PlayerTest\tetAi.obj
+         x64\PlayerTest\tetConstants.obj
+         x64\PlayerTest\tetCore.obj
+         x64\PlayerTest\tetGameInfo.obj
+         x64\PlayerTest\tetKeySender.obj
+         x64\PlayerTest\tetPlayer.obj
+         TetrisFriendsAi.vcxproj -> C:\Users\Jack\Dropbox\Projects\tetrisfriends\win\TetrisFriendsAi\x64\PlayerTest\TetrisFriendsAi.exe
+     1>Done Building Project "C:\Users\Jack\Dropbox\Projects\tetrisfriends\win\TetrisFriendsAi\TetrisFriendsAi.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.94

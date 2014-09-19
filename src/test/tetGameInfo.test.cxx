@@ -14,7 +14,7 @@ void lReceived(int num)
 
 int main()
 {
-	tetGameInfo gameInfo("wlan0");
+  tetGameInfo gameInfo("{C25A865C-49E4-4656-8463-FC8155E5D95C}");
 	gameInfo.registerLinesSentCallback(lSend);
 	gameInfo.registerLinesReceivedCallback(lReceived);
 	gameInfo.captureLinesAsync();

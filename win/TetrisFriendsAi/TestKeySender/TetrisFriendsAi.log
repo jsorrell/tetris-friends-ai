@@ -1,0 +1,15 @@
+﻿Build started 9/17/2014 9:27:38 PM.
+     1>Project "C:\Users\Jack\Dropbox\Projects\tetrisfriends\win\TetrisFriendsAi\TetrisFriendsAi.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\Jack\Dropbox\Projects\tetrisfriends\src\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"TestKeySender\\" /Fd"TestKeySender\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt tetConstants.cxx
+         tetConstants.cxx
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Jack\Dropbox\Projects\tetrisfriends\win\TetrisFriendsAi\TestKeySender\TetrisFriendsAi.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Jack\Dropbox\Projects\tetrisfriends\win\TetrisFriendsAi\TestKeySender\TetrisFriendsAi.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Jack\Dropbox\Projects\tetrisfriends\win\TetrisFriendsAi\TestKeySender\TetrisFriendsAi.lib" /MACHINE:X86 /SAFESEH TestKeySender\tetKeySender.test.obj
+         TestKeySender\tetConstants.obj
+         TestKeySender\tetKeySender.obj
+         TetrisFriendsAi.vcxproj -> C:\Users\Jack\Dropbox\Projects\tetrisfriends\win\TetrisFriendsAi\TestKeySender\TetrisFriendsAi.exe
+     1>Done Building Project "C:\Users\Jack\Dropbox\Projects\tetrisfriends\win\TetrisFriendsAi\TetrisFriendsAi.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.22

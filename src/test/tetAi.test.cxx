@@ -1,9 +1,11 @@
 #include "tetAi.hpp"
 #include "tetCore.hpp"
 #include <random>
-#include <unistd.h>
 #include <chrono>
 #include <thread>
+#include <algorithm>
+
+using namespace std;
 using namespace Tetris;
 
 int main()
