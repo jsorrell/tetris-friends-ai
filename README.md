@@ -1,6 +1,6 @@
-tetris-friends-reader
+TetrisFriendsAI
 =====================
 
-Reads information on Tetris Friends arena
+AI for Tetris Friends arena
 
 NOT INTENDED FOR ANY USE VIOLATING THE TETRIS FRIENDS ACCEPTABLE USAGE POLICY
